@@ -9,4 +9,4 @@ Skills installés sur ce dépôt. Chacun reste sous sa licence MIT d’origine.
 | [cad-edit](cad-edit) | Lit, modifie et trace des DWG sans fenêtre AutoCAD | [xy425yi/claude-cad-skill](https://github.com/xy425yi/claude-cad-skill) |
 | [mechanical-drafting-gbt](mechanical-drafting-gbt) | Plans mécaniques, assemblages, contrôle DRC et sortie | [beiming183-cloud/AutoCAD-skills](https://github.com/beiming183-cloud/AutoCAD-skills) |
 
-Le dossier à ouvrir sur GitHub est [skills](https://github.com/Meserigne/Theta/tree/main/skills).
+Le dépôt est [thetaingenierie-png/autocad-skills](https://github.com/thetaingenierie-png/autocad-skills).
