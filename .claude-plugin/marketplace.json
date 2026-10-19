@@ -1,0 +1,50 @@
+{
+  "name": "theta-ingenierie",
+  "version": "1.0.0",
+  "description": "Skills AutoCAD et connecteurs Claude de Theta Ingénierie.",
+  "owner": {
+    "name": "Theta Ingénierie",
+    "email": "thetaingenierie@gmail.com",
+    "url": "https://github.com/thetaingenierie-png"
+  },
+  "plugins": [
+    {
+      "name": "autocad-drawing",
+      "source": "./autocad-drawing",
+      "description": "Dessine dans AutoCAD ouvert, via COM, puis relit la géométrie.",
+      "repository": "https://github.com/thetaingenierie-png/autocad-skills",
+      "license": "MIT"
+    },
+    {
+      "name": "cad-edit",
+      "source": "./cad-edit",
+      "description": "Lit, modifie et trace des DWG sans fenêtre AutoCAD.",
+      "repository": "https://github.com/thetaingenierie-png/autocad-skills",
+      "license": "MIT"
+    },
+    {
+      "name": "mechanical-drafting-gbt",
+      "source": "./mechanical-drafting-gbt",
+      "description": "Plans mécaniques, assemblages, contrôle DRC et sortie.",
+      "repository": "https://github.com/thetaingenierie-png/autocad-skills",
+      "license": "MIT"
+    },
+    {
+      "name": "check-autocad",
+      "source": "./check-autocad",
+      "description": "Vérifie qu’AutoCAD est ouvert et accessible.",
+      "repository": "https://github.com/thetaingenierie-png/autocad-skills",
+      "license": "MIT"
+    },
+    {
+      "name": "theta-architecture",
+      "source": {
+        "source": "github",
+        "repo": "thetaingenierie-png/architecture"
+      },
+      "description": "Connecteurs Autodesk, AutoCAD, IFC, Rhino, Blender, SketchUp et Fusion.",
+      "repository": "https://github.com/thetaingenierie-png/architecture",
+      "license": "MIT"
+    }
+  ]
+}
