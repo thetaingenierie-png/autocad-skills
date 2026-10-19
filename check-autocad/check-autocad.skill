@@ -1,0 +1,130 @@
+# Check AutoCAD Connection
+
+---
+
+## Trigger
+
+Use this skill when the user asks:
+- "Are you connected to AutoCAD?"
+- "Is AutoCAD connected?"
+- "Check my AutoCAD connection"
+- "Can you see AutoCAD?"
+- Any question about whether Claude can reach / draw in the local AutoCAD instance.
+
+---
+
+## What This Skill Does
+
+Runs a lightweight diagnostic script that:
+1. Confirms pywin32 (the COM bridge) is installed.
+2. Attaches to the running AutoCAD instance.
+3. Confirms a drawing is open.
+4. Performs a quick write test — places the text **"Hello from Claude. You are connected to AutoCAD."** at the drawing origin (0,0,0) at 250mm height as live proof of connection.
+
+No project number needed — this check has no saved outputs.
+
+---
+
+## Step-by-Step Procedure
+
+### Step 1 — Run the check script
+
+```bash
+python tools/check-autocad/check_autocad.py
+```
+
+The script exits **0** (success) or **1** (failure) and prints a single JSON object.
+
+---
+
+### Step 2 — Interpret the result
+
+**Success — `"status": "ok"`**
+
+If `"text_written": true`, tell the user:
+
+> Connected to **{product}** (version {version}).
+> Active drawing: **{document}**
+>
+> You should see the text **"Hello from Claude. You are connected to AutoCAD."** sitting at the drawing origin. If you can't see it, zoom extents (type `ZOOM` → `E` in AutoCAD).
+>
+> You're all set. See below for what you can do next.
+
+If `"text_written": false` (rare — show `text_warning`):
+
+> Connected to **{product}** but the hello text could not be placed: {text_warning}
+> The connection is live but something prevented writing. Check the drawing is not in a locked or read-only state.
+
+---
+
+**Failure — read `"code"` and respond as follows:**
+
+| Code | What happened | What to tell the user |
+|------|--------------|----------------------|
+| `NO_PYWIN32` | Python COM bridge not installed | Run `pip install pywin32` in the terminal, then try again. |
+| `NOT_RUNNING` | AutoCAD installed but not open | Open AutoCAD, open a drawing (.dwg), then ask again. |
+| `NOT_INSTALLED` | AutoCAD not found on this machine | Install a COM-capable version of AutoCAD for Windows (full AutoCAD or AutoCAD LT). AutoCAD for Mac does not support COM and will not work. |
+| `NO_DOCUMENT` | AutoCAD open but no drawing loaded | Open or create a .dwg file inside AutoCAD, then ask again. |
+| `READONLY` | Drawing is locked or read-only | Make sure the drawing is not opened as read-only and is not checked out by another user. |
+| `COM_ERROR` | Low-level COM failure | (1) Restart AutoCAD. (2) Run AutoCAD as Administrator once to re-register COM. (3) Repair the AutoCAD installation from Programs & Features. |
+
+Always show the `"fix"` text from the JSON alongside your explanation.
+
+---
+
+### Step 3 — Present next steps (on success only)
+
+After confirming the connection, always present the user with this menu. Use the exact skills and framing below — adapt wording to match what skills actually exist in the `skills/` folder.
+
+---
+
+**What would you like to do?**
+
+#### Use an existing skill
+These are the ready-to-run skills in this workspace:
+
+| Skill | What it does | How to start |
+|-------|-------------|--------------|
+| **Pad Footing** | Designs a concentrically loaded pad footing to AS3600, generates a PDF calc sheet, and draws the plan, sections, and reo schedule in AutoCAD. | Say: *"Design a pad footing"* or *"Run PF1"* |
+
+#### Build a new skill
+If there's a structural element or workflow you repeat — strip footings, columns, beams, slabs, connections — say the word and we can build a new skill together.
+
+The process is:
+1. You describe what you want designed and drawn.
+2. Claude writes the Python scripts (`tools/[skill-name]/`) and the skill file (`skills/[skill-name].skill`).
+3. You LOCK it by running the test suite against a verified spreadsheet.
+4. It becomes part of your permanent toolkit.
+
+**Say something like:**
+- *"Build me a strip footing skill"*
+- *"I want to design rectangular columns"*
+- *"Can you draw a beam schedule?"*
+
+#### Ask a question
+Not sure what's possible? Just ask. Claude can explain any skill, show you the design equations it uses, or walk you through what a skill will produce before you commit to running it.
+
+---
+
+## Edge Cases Reference
+
+1. **pywin32 not installed** — `pip install pywin32` fixes it.
+2. **AutoCAD not running** — Open it, open a drawing, try again.
+3. **AutoCAD not installed** — Requires AutoCAD for Windows (full or LT). Mac and web versions do not support COM.
+4. **No drawing open** — AutoCAD shows the start screen. Open a .dwg file.
+5. **Drawing read-only or locked** — Opened as read-only, or locked by Vault/BIM360. Open a writeable copy.
+6. **COM registration broken** — Run AutoCAD as Administrator once, or repair the installation.
+7. **Multiple AutoCAD instances** — `GetActiveObject` targets whichever Windows considers "active". Close all but one.
+
+---
+
+## Notes
+
+- Windows only. COM is a Windows technology.
+- Tested with AutoCAD 2018–2025 (full) and AutoCAD LT for Windows.
+- The hello text is placed at (0,0,0) on layer 0 at height 250. It is intentional — it stays in the drawing as confirmation. The user can delete it manually if they want.
+
+---
+
+## LOCK Status
+☐ UNLOCKED — connection utility, no design calcs, no LOCK required.
