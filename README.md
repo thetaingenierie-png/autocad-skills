@@ -8,6 +8,7 @@ Skills installés sur ce dépôt. Chacun reste sous sa licence MIT d’origine.
 | [autocad-drawing](autocad-drawing) | Dessine dans AutoCAD ouvert, via COM, puis relit la géométrie | [MiaTxxx/autocad-skill-marketplace](https://github.com/MiaTxxx/autocad-skill-marketplace) |
 | [cad-edit](cad-edit) | Lit, modifie et trace des DWG sans fenêtre AutoCAD | [xy425yi/claude-cad-skill](https://github.com/xy425yi/claude-cad-skill) |
 | [mechanical-drafting-gbt](mechanical-drafting-gbt) | Plans mécaniques, assemblages, contrôle DRC et sortie | [beiming183-cloud/AutoCAD-skills](https://github.com/beiming183-cloud/AutoCAD-skills) |
+| [plan-archi-villa](plan-archi-villa) | Plan architectural d’une villa : niveaux, surfaces, coupe, façades | Theta Ingénierie |
 
 Le dépôt est [thetaingenierie-png/autocad-skills](https://github.com/thetaingenierie-png/autocad-skills).
 
@@ -20,5 +21,6 @@ Compte Claude : `thetaingenierie@gmail.com`. Le catalogue est [`.claude-plugin/m
 /plugin install cad-edit --marketplace thetaingenierie-png/autocad-skills
 /plugin install mechanical-drafting-gbt --marketplace thetaingenierie-png/autocad-skills
 /plugin install check-autocad --marketplace thetaingenierie-png/autocad-skills
+/plugin install plan-archi-villa --marketplace thetaingenierie-png/autocad-skills
 /plugin install theta-architecture --marketplace thetaingenierie-png/autocad-skills
 ```

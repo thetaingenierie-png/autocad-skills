@@ -1,0 +1,11 @@
+{
+  "name": "plan-archi-villa",
+  "version": "1.0.0",
+  "description": "Établit le plan architectural d’une villa : programme, surfaces, niveaux, coupes et façades, puis le dessine dans AutoCAD ou en DXF.",
+  "author": {
+    "name": "Theta Ingénierie",
+    "url": "https://github.com/thetaingenierie-png"
+  },
+  "license": "MIT",
+  "keywords": ["architecture", "villa", "plan", "autocad", "permis"]
+}

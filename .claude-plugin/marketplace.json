@@ -45,6 +45,20 @@
       "description": "Connecteurs Autodesk, AutoCAD, IFC, Rhino, Blender, SketchUp et Fusion.",
       "repository": "https://github.com/thetaingenierie-png/architecture",
       "license": "MIT"
+    },
+    {
+      "name": "plan-archi-villa",
+      "source": "./plan-archi-villa",
+      "description": "Plan architectural d’une villa : programme, surfaces, niveaux, coupe et façades.",
+      "version": "1.0.0",
+      "repository": "https://github.com/thetaingenierie-png/autocad-skills",
+      "license": "MIT",
+      "keywords": [
+        "architecture",
+        "villa",
+        "plan",
+        "autocad"
+      ]
     }
   ]
 }
